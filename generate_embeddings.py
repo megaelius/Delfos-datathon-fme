@@ -8,28 +8,28 @@ from pathlib import Path
 from sentence_transformers import SentenceTransformer
 
 #model = SentenceTransformer('all-mpnet-base-v2')
-model = SentenceTransformer('all-MiniLM-L6-v2')
-
+model = SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')
 def main(input_path, output_path):
+    f=open(input_path)
+    json_data=json.load(f)
+    nrows = len(json_data)
 
-    final_db = pd.read_csv(input_path + '/predictionDB.csv',lineterminator='\n')
-    nrows = final_db.shape[0]
-
-    if not Path(output_path + '/embeddings').exists():
-        Path(output_path + '/embeddings').mkdir()
-
-    if not Path(output_path + '/embeddings2').exists():
-        Path(output_path + '/embeddings2').mkdir()
-
-    for index,row in tqdm(final_db.iterrows()):
-        frases = row['COMMIT_MESSAGE']
-        matrix = model.encode(frases)
-        np.save(output_path +'/embeddings/' + row['COMMIT_HASH'] + '.npy',matrix)
-
-        frases = row['CLEAN_CMS']
-        matrix = model.encode(frases)
-        np.save(output_path +'/embeddings2/' + row['COMMIT_HASH'] + '.npy',matrix)
-
+    if not Path(output_path).exists():
+        Path(output_path).mkdir()
+    for restaurant in tqdm(json_data):
+        #print(restaurant)
+        for user_review in restaurant['reviews_data']:
+            text = user_review['snippet']
+            if not (Path(output_path) / (restaurant['place_id'] + '_' + user_review['user']['name'].replace('/','') + '.npy')).is_file():
+                matrix = model.encode(text)
+                try:
+                    np.save(Path(output_path) / (restaurant['place_id'] + '_' + user_review['user']['name'].replace('/','') + '.npy'),matrix)
+                except:
+                    print(user_review)
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--json_path', type=str, default='Data/data.json', help='input json path')
+    parser.add_argument('--out_path', type=str, default='Data/embeddings', help='output_path for embeddings')
+    args = parser.parse_args()
+    main(args.json_path, args.out_path)
