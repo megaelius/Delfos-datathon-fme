@@ -203,7 +203,7 @@ class Recommender(object):
 
         return [(v, k) for k, v in sorted(results.items(), key=lambda item: -item[1])][:(min(k, len(results)))]
 
-    def recommend_item_to_item(self, user_name, k, put_visited_too = False, coords = None):
+    def recommend_item_to_item(self, user_name, k, put_visited_too = False, coords = None, max_dist = 5, max_price = 4):
         '''
         Returns a list of at most k pairs (restaurant,predicted_rating)
         adequate for a user whose name is user_name
@@ -214,8 +214,15 @@ class Recommender(object):
         rating_dict = dict(self.get_user_ratings(user_idx))
         pq = PriorityQueue(maxsize = k)
         for restaurant_id in range(len(self.json_data)):
-            if restaurant_id not in rating_dict:
-                restaurant1 = self.get_dictionary(restaurant_id)
+            restaurant1 = self.get_dictionary(restaurant_id)
+            price = restaurant1['Price']
+            dist_ok = True
+            coords is not None:
+                coords1 = restaurant1['Coordinates']
+                distance = geopy.distance.distance(coords1, coords).km
+                dist_ok = distance < max_dist
+            if restaurant_id not in rating_dict and price <= max_price and dist_ok:
+
                 sum_values, sim_values = [], []
                 average_sim = {}
                 pred = 0
