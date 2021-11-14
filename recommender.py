@@ -183,11 +183,11 @@ class Recommender(object):
                 sim[variable] = self.similarity_variables(variable, restaurant1[variable], restaurant2[variable])
         return sim
 
-    def recommend_to_group(self, names, k, put_visited_too=False, coords_group = None):
+    def recommend_to_group(self, names, k, put_visited_too=False, coords_group = None,max_dist = 5, max_price = 4):
         recomendations = {}
 
         for name in names:
-            recs = self.recommend_item_to_item(name, 10*k, put_visited_too=put_visited_too,coords = coords_group)
+            recs = self.recommend_item_to_item(name, 10*k, put_visited_too=put_visited_too,coords = coords_group,max_dist = max_dist, max_price = max_price)
             res = []
             for rec in recs:
                 aux_pred = rec[0] if rec[0] > 0 else 0
@@ -217,9 +217,9 @@ class Recommender(object):
             restaurant1 = self.get_dictionary(restaurant_id)
             price = restaurant1['Price']
             dist_ok = True
-            coords is not None:
+            if coords is not None:
                 coords1 = restaurant1['Coordinates']
-                distance = geopy.distance.distance(coords1, coords).km
+                distance = geopy.distance.distance(coords1, coords).m/1000.0
                 dist_ok = distance < max_dist
             if restaurant_id not in rating_dict and price <= max_price and dist_ok:
 
@@ -267,9 +267,9 @@ class Recommender(object):
                     else:
                         pq.put(top)
 
-        topk = [None for _ in range(k)]
+        topk = []
         i = k - 1
         while not pq.empty():
-            topk[i] = pq.get()
+            topk.append(pq.get())
             i -= 1
-        return topk
+        return reversed(topk)
