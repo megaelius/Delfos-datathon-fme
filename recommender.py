@@ -190,10 +190,11 @@ class Recommender(object):
             recs = self.recommend_item_to_item(name, 10*k, put_visited_too=put_visited_too,coords = coords_group)
             res = []
             for rec in recs:
+                aux_pred = rec[0] if rec[0] > 0 else 0
                 if rec[1] not in recomendations:
-                    recomendations[rec[1]] = [rec[0]]
+                    recomendations[rec[1]] = [aux_pred]
                 else:
-                    recomendations[rec[1]].append(rec[0])
+                    recomendations[rec[1]].append(aux_pred)
 
         results = {}
         for restaurant, predictions in recomendations.items():
