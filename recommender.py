@@ -13,7 +13,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 class Recommender(object):
 
     #"""initializes a recommender from a movie file and a ratings file"""
-    def __init__(self,var_weights):
+    def __init__(self,var_weights = None):
 
         # Reading the observations.
         f = open('./Data/data.json')
@@ -69,7 +69,16 @@ class Recommender(object):
                     self._max_geo_distance = d
         print(f'Max distance between restaurants is {self._max_geo_distance}')
 
-        self.weights = var_weights
+        if var_weights is None:
+            self.weights = {'Price':1/6,
+                            'Embedding':1/6,
+                            'Ratings':1/6,
+                            'Rating':1/6,
+                            'Embeddings':1/6,
+                            'Coordinates':1/6
+            }
+        else:
+            self.weights = var_weights
 
     def set_var_weights(self,var_weights):
         self.weights = var_weights
