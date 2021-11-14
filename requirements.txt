@@ -1,0 +1,12 @@
+sklearn
+numpy
+pandas
+geopy
+sentence-transformers
+google-images-search
+folium
+streamlit
+transformers
+translate
+matplotlib
+tqdm

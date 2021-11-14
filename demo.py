@@ -28,13 +28,13 @@ def main():
         print(r.print_user_reviews(u))
     ini = time.time()
     #recomendations = r.recommend_item_to_item(user, 100, put_visited_too=False)
-    recomendations = r.recommend_to_group(group, 10, coords_group = (41.3808593, 2.1746778))
+    recomendations = r.recommend_to_group(group, 10, coords_group = (41.3808593, 2.1746778), max_dist = 0.5)
     print('Time in the item to item:', time.time() - ini)
     for i in range(len(recomendations)):
         try:
-            print(i+1, ': ', r.restaurant_name(recomendations[i][1]), ' - ', recomendations[i][0], ' - ', recomendations[i][2], sep='')
+            print(i+1, ': ', r.restaurant_name(recomendations[i][1]), ' - ', recomendations[i][2], sep='')
         except:
-            print(i+1, ': ', r.restaurant_name(recomendations[i][1]), ' - ', recomendations[i][0], sep='')
+            print(i+1, ': ', r.restaurant_name(recomendations[i][1]), sep='')
     print()
     print()
 
