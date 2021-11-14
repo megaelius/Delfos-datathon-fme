@@ -11,3 +11,4 @@ translate
 matplotlib
 tqdm
 geocoder
+branca==0.3.1
