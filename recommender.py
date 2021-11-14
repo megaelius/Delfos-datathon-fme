@@ -6,6 +6,7 @@ from pathlib import Path
 from numpy.linalg import norm
 from queue import PriorityQueue
 import geopy.distance
+from statistics import harmonic_mean
 
 from sklearn.metrics.pairwise import cosine_similarity
 
@@ -27,18 +28,21 @@ class Recommender(object):
         self._user_ratings = {} # ratings for a user
         for restaurant_idx, restaurant in enumerate(self.json_data):
             for review in restaurant['reviews_data']:
-                self.customer_names[review['user']['name']] = customer_idx
+                if review['user']['name'] not in self.customer_names:
+                    self.customer_names[review['user']['name']] = customer_idx
+                    customer_idx += 1
+                aux_customer_idx = self.customer_names[review['user']['name']]
                 # Its the first time a restaurant is added to the dict.
-                if review['user']['name'] not in self._user_ratings:
-                    self._user_ratings[customer_idx] = [(restaurant_idx, review['rating'])]
+                if aux_customer_idx not in self._user_ratings:
+                    self._user_ratings[aux_customer_idx] = [(restaurant_idx, review['rating'])]
                 else:
-                    self._user_ratings[customer_idx].append((restaurant_idx, review['rating']))
+                    self._user_ratings[aux_customer_idx].append((restaurant_idx, review['rating']))
 
                 if restaurant_idx not in self._restaurant_ratings:
-                    self._restaurant_ratings[restaurant_idx] = [(customer_idx, review['rating'])]
+                    self._restaurant_ratings[restaurant_idx] = [(aux_customer_idx, review['rating'])]
                 else:
-                    self._restaurant_ratings[restaurant_idx].append((customer_idx, review['rating']))
-                customer_idx += 1
+                    self._restaurant_ratings[restaurant_idx].append((aux_customer_idx, review['rating']))
+        print('Total reviewers:',len(self.customer_names))
 
         self._restaurant_dicts = []
         for i, restaurant in enumerate(self.json_data):
@@ -70,25 +74,9 @@ class Recommender(object):
     def set_var_weights(self,var_weights):
         self.weights = var_weights
 
-    def recommend_to_group(self, names, k, put_visited_too=True):
-        recommendations = {}
-
-        for name in names:
-            pq = self.recommend_item_to_item(name, 10*k, put_visited_too=put_visited_too)
-            res = []
-            while not pq.empty():
-                top = pq.get()
-                if top[1] not in recommendations:
-                    recommendations[top[1]] = [top[0]]
-                else:
-                    recommendations[top[1]].append(top[0])
-
-        results = {}
-        for restaurant, predictions in recommendations.items():
-            if len(predictions) == len(names):
-                results[restaurant] = harmonic_mean(predictions)
-
-        return [(k, v) for k, v in sorted(results.items(), key=lambda item: -item[1])][:(min(k, len(results)))]
+    def print_user_reviews(self,user_name):
+        for restaurant_id, rating in self._user_ratings[self.customer_names[user_name]]:
+            print(self.json_data[restaurant_id]['title'],':',rating)
 
     def restaurant_name(self,id):
         return self.json_data[id]['title']
@@ -174,36 +162,38 @@ class Recommender(object):
             return self.similarity_coordinates(values1, values2)
 
 
-    def similarity(self, restaurant1, restaurant2):
+    def similarity(self, restaurant1, restaurant2, coords = None):
         '''
         Function that computes the similarity between two restaurants.
         '''
         sim = {v:0 for v in restaurant1}
         for variable in restaurant1:
-            sim[variable] = self.similarity_variables(variable, restaurant1[variable], restaurant2[variable])
+            if variable == 'Coordinates' and coords is not None:
+                sim[variable] = self.similarity_variables(variable, restaurant1[variable], coords)
+            else:
+                sim[variable] = self.similarity_variables(variable, restaurant1[variable], restaurant2[variable])
         return sim
 
-    def recommend_to_group(self, names, k, put_visited_too=True):
-        recommendations = {}
+    def recommend_to_group(self, names, k, put_visited_too=False, coords_group = None):
+        recomendations = {}
 
         for name in names:
-            pq = self.recommend_item_to_item(name, 10*k, put_visited_too=put_visited_too)
+            recs = self.recommend_item_to_item(name, 10*k, put_visited_too=put_visited_too,coords = coords_group)
             res = []
-            while not pq.empty():
-                top = pq.get()
-                if top[1] not in recommendations:
-                    recommendations[top[1]] = [top[0]]
+            for rec in recs:
+                if rec[1] not in recomendations:
+                    recomendations[rec[1]] = [rec[0]]
                 else:
-                    recommendations[top[1]].append(top[0])
+                    recomendations[rec[1]].append(rec[0])
 
         results = {}
-        for restaurant, predictions in recommendations.items():
+        for restaurant, predictions in recomendations.items():
             if len(predictions) == len(names):
                 results[restaurant] = harmonic_mean(predictions)
 
-        return [(k, v) for k, v in sorted(results.items(), key=lambda item: -item[1])][:(min(k, len(results)))]
+        return [(v, k) for k, v in sorted(results.items(), key=lambda item: -item[1])][:(min(k, len(results)))]
 
-    def recommend_item_to_item(self, user_name, k, put_visited_too = False):
+    def recommend_item_to_item(self, user_name, k, put_visited_too = False, coords = None):
         '''
         Returns a list of at most k pairs (restaurant,predicted_rating)
         adequate for a user whose name is user_name
@@ -221,7 +211,7 @@ class Recommender(object):
                 pred = 0
                 for restaurant_id_gone, rating in rating_dict.items():
                     restaurant2 = self.get_dictionary(restaurant_id_gone)
-                    sim = self.similarity(restaurant1, restaurant2)
+                    sim = self.similarity(restaurant1, restaurant2, coords = coords)
                     s = 0
                     for v in sim:
                         s += sim[v]*self.weights[v]
@@ -230,16 +220,17 @@ class Recommender(object):
                         else:
                             average_sim[v] = sim[v]/len(rating_dict)
                     # if sim > 0.3:
-                    '''
+
                     sum_values.append(rating - restaurant2["Rating"])
-                    sim_values.append(sim)
-                    pred += sim * (rating - restaurant2["Rating"])
+                    sim_values.append(s)
+                    pred += s * (rating - restaurant2["Rating"])
                     '''
-                    pred += s * rating
+                    pred += s * (rating - restaurant2["Rating"])
+                    '''
 
                 if pred > 0:
                     #print(pred, sim_values, norm(sim_values), sum_values, norm(sum_values)
-                    pred = pred/len(rating_dict)# + restaurant1["Rating"]
+                    pred = pred/sum(sim_values) + restaurant1["Rating"]
 
                 if not pq.full(): pq.put((pred, restaurant_id, average_sim))
                 else:
@@ -251,36 +242,17 @@ class Recommender(object):
 
             elif put_visited_too:
                 pred = rating_dict[restaurant_id]
-                if not pq.full(): pq.put((pred, restaruant_id_gone))
+                if not pq.full(): pq.put((pred, restaurant_id, None))
                 else:
                     top = pq.get()
                     if top[0] < pred:
-                        pq.put((pred,restaruant_id_gone ))
+                        pq.put((pred, restaurant_id, None))
                     else:
                         pq.put(top)
 
-        return pq
-
-def main():
-    ini = time.time()
-    w = {'Price':0,
-         'Embedding':0,
-         'Ratings':0,
-         'Rating':0,
-         'Embeddings':1,
-         'Coordinates':0
-
-    }
-    r = Recommender(var_weights = w)
-    print('Time in the init:', time.time() - ini)
-
-    ini = time.time()
-    pq = r.recommend_item_to_item('pablo gonzalo zalazar (Pablonza)', 10)
-    print('Time in the item to item:', time.time() - ini)
-
-    while not pq.empty():
-        top = pq.get()
-        print(pq.qsize() + 1, ': ', r.restaurant_name(top[1]), ' - ', top[0], ' - ', top[2], sep='')
-    print()
-    print()
-main()
+        topk = [None for _ in range(k)]
+        i = k - 1
+        while not pq.empty():
+            topk[i] = pq.get()
+            i -= 1
+        return topk
