@@ -4,7 +4,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/megaelius/Delfos-datathon-fme">
-    <img src="README_Images/logo.png" alt="Logo" width="80" height="80">
+    <img src="README_Images/logo2.png" alt="Logo">
   </a>
 
 <h3 align="center">Delfos Groupal Restaurant Recommender</h3>
