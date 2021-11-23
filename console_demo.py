@@ -4,7 +4,7 @@ import time
 import numpy as np
 from pathlib import Path
 
-from recommender import Recommender
+from Auxiliary.recommender import Recommender
 
 def main():
     ini = time.time()

@@ -3,9 +3,9 @@ import pandas as pd
 import folium
 import pickle
 from google_images_search import GoogleImagesSearch
-import utils_streamlit as ut
+import Auxiliary.utils_streamlit as ut
 import json
-from recommender import Recommender
+from Auxiliary.recommender import Recommender
 import geocoder
 
 if 'recommender' not in st.session_state:
@@ -15,7 +15,7 @@ if 'users' not in st.session_state:
 if 'page' not in st.session_state:
     st.session_state['page'] = 1
 if 'search_keys' not in st.session_state:
-    st.session_state['search_keys'] = pickle.load(open("Search_engine_keys.pickle","rb"))
+    st.session_state['search_keys'] = pickle.load(open("./Auxiliary/Search_engine_keys.pickle","rb"))
 if 'search' not in st.session_state:
     st.session_state['search'] = GoogleImagesSearch(st.session_state['search_keys']["api"],st.session_state['search_keys']["cx"])
 if 'data' not in st.session_state:
@@ -49,8 +49,8 @@ if st.session_state['page'] == 1:
     col1, mid, col2 = st.columns([1,1,20])
     for i,usr in enumerate(st.session_state['users']):
         with col1:
-            if i < 5: st.image("./demo_images/"+str(i)+".png", width=50)
-            else: st.image("./demo_images/default.png", width=50)
+            if i < 5: st.image("./Demo_images/"+str(i)+".png", width=50)
+            else: st.image("./Demo_images/default.png", width=50)
         with col2:
             st.subheader(usr)
 
