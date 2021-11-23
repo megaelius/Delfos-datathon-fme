@@ -68,7 +68,9 @@ This project was developed between 13-14 November 2021 by the Delfos Team during
 
   <p align="center"><i>WHAT RESTAURANTS IN BARCELONA WOULD YOU RECOMMEND TO SOMEONE?</i></p>
 
-[![Screen Shot][product-screenshot]](https://example.com)
+<div align="center">
+    <img src="README_Images/screenshot.png" alt="Logo">
+  </div>
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -76,14 +78,10 @@ This project was developed between 13-14 November 2021 by the Delfos Team during
 
 ### Built With
 
-* [Next.js](https://nextjs.org/)
-* [React.js](https://reactjs.org/)
-* [Vue.js](https://vuejs.org/)
-* [Angular](https://angular.io/)
-* [Svelte](https://svelte.dev/)
-* [Laravel](https://laravel.com)
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
+* <img align="left" alt="Sbert" width="26px" src="./README_Images/sbert.png"> [SentenceTransformers](https://www.sbert.net/)
+* [Streamlit](https://streamlit.io/)
+* [Python](https://vuejs.org/)
+* [<img align="left" alt="GitHub" width="26px" src="https://raw.githubusercontent.com/github/explore/78df643247d429f6cc873026c0622819ad797942/topics/github/github.png" />]
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
