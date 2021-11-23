@@ -4,13 +4,13 @@
 <br />
 <div align="center">
   <a href="https://github.com/megaelius/Delfos-datathon-fme">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="README_Images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">project_title</h3>
+<h3 align="center">Delfos Groupal Restaurant Recommender</h3>
 
   <p align="center">
-    project_description
+    Winning project of the FME Datathon 2021 Reviews Challenge
     <br />
     <a href="https://github.com/megaelius/Delfos-datathon-fme"><strong>Explore the docs »</strong></a>
     <br />
@@ -19,7 +19,7 @@
     ·
     <a href="https://github.com/megaelius/Delfos-datathon-fme/issues">Report Bug</a>
     ·
-    <a href="https://github.com/megaelius/Delfos-datathon-fme/issues">Request Feature</a>
+    <a href="https://github.com/megaelius/Delfos-datathon-fme/pulls">Request Feature</a>
   </p>
 </div>
 
@@ -56,9 +56,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Screen Shot][product-screenshot]](https://example.com)
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `megaelius`, `Delfos-datathon-fme`, `twitter_handle`, `linkedin_username`, `email`, `email_client`, `project_title`, `project_description`
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
