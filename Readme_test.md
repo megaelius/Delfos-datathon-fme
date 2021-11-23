@@ -4,13 +4,13 @@
 <br />
 <div align="center">
   <a href="https://github.com/megaelius/Delfos-datathon-fme">
-    <img src="README_Images/logo2.png" alt="Logo">
+    <img src="README_Images/logo.png" alt="Logo">
   </a>
 
-<h3 align="center">Delfos Groupal Restaurant Recommender</h3>
+<h3 align="center">Delfos' Restaurant Recommendation System for Groups</h3>
 
   <p align="center">
-    Winning project of the FME Datathon 2021 Reviews Challenge
+    Winning project of the  <a href=https://datathon.cat/>FME Datathon 2021</a> Reviews Challenge
     <br />
     <a href="https://github.com/megaelius/Delfos-datathon-fme"><strong>Explore the docs »</strong></a>
     <br />
@@ -56,12 +56,22 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
+Finding restaurants that one may like it's nowadays an easy task thanks to all the software tools we currently have. However such task becomes more difficult when instead of going by ourselves, we go to have dinner in a group. Everyone has different tastes, preferences, and budgets. Thus, it is not trivial how to combine them to select a restaurant that everybody will love.
+
+To ease this task, we have developed a Restaurant Recommendation System that uses the restaurant prices, location, ratings, and reviews from both users and restaurants to find the perfect match for you and your companions.
+
+This recommender can be used with the provided GUI, which allows to introduce the users, view and filter the restaurants intuitively and comfortably.
+
+***DEVELOPMENT INFORMATION***
+
+This project was developed between 13-14 November 2021 by the Delfos Team during the Datathon FME 2021, [taking first place in the Reviews challenge](https://fme.upc.edu/ca/noticies/cronica-de-la-1a-datathon-fme-2021). This challenge aimed to answer the following question:
+
+  <p align="center"><i>WHAT RESTAURANTS IN BARCELONA WOULD YOU RECOMMEND TO SOMEONE?</i></p>
+
 [![Screen Shot][product-screenshot]](https://example.com)
 
 
-
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 ### Built With
@@ -76,7 +86,6 @@
 * [JQuery](https://jquery.com)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 <!-- GETTING STARTED -->
@@ -168,6 +177,9 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
+Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
 Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
 
 Project Link: [https://github.com/megaelius/Delfos-datathon-fme](https://github.com/megaelius/Delfos-datathon-fme)
