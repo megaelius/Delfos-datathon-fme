@@ -129,3 +129,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Readme files
+/README_Images
