@@ -38,12 +38,10 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -69,7 +67,7 @@ This project was developed between 13-14 November 2021 by the Delfos Team during
   <p align="center"><i>WHAT RESTAURANTS IN BARCELONA WOULD YOU RECOMMEND TO SOMEONE?</i></p>
 
 <div align="center">
-    <img src="README_Images/screenshot.png" alt="Logo">
+    <img src="README_Images/screenshot.png" alt="SS1">
   </div>
 
 
@@ -78,10 +76,9 @@ This project was developed between 13-14 November 2021 by the Delfos Team during
 
 ### Built With
 
-* <img align="left" alt="Sbert" width="26px" src="./README_Images/sbert.png"> [SentenceTransformers](https://www.sbert.net/)
+* [SentenceTransformers](https://www.sbert.net/)
 * [Streamlit](https://streamlit.io/)
-* [Python](https://vuejs.org/)
-* [<img align="left" alt="GitHub" width="26px" src="https://raw.githubusercontent.com/github/explore/78df643247d429f6cc873026c0622819ad797942/topics/github/github.png" />]
+* [Python](https://www.python.org/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -89,33 +86,18 @@ This project was developed between 13-14 November 2021 by the Delfos Team during
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+To get a local copy up and running you just need to follow these simple example steps!
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
    git clone https://github.com/megaelius/Delfos-datathon-fme.git
    ```
-3. Install NPM packages
+2. Install the necessary libraries and packages.
    ```sh
-   npm install
+   pip3 install -r requirements.txt
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
-
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
@@ -123,26 +105,34 @@ This is an example of how to list things you need to use the software and how to
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+To use the Delfos' Recommender GUI the following command needs to be executed:
+   ```sh
+   streamlit run app.py
+   ```
+Then, in the initial page of the app we can select which users are going to eat out:
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+<div align="center">
+    <img src="README_Images/screenshot2.png" alt="SS2">
+  </div>
+
+Once all of them have been introduced, clicking in the *Find restaurants!* button. 
+A newer page will pop up, showing the five restaurants that fit best the integrants of the groups according to their reviews.
+If needed, using the slider on the left , results can be filtered by price and distance. 
+
+<div align="center">
+    <img src="README_Images/screenshot3.png" alt="SS3">
+  <br>
+  <br>
+  </div>
+
+
+
+In case you want to use the recommender from the terminal, this is possible by executing:
+   ```sh
+   python3 terminal.py
+   ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-- [] Feature 1
-- [] Feature 2
-- [] Feature 3
-    - [] Nested Feature
-
-See the [open issues](https://github.com/megaelius/Delfos-datathon-fme/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 <!-- CONTRIBUTING -->
@@ -175,10 +165,13 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+* Elías Abad - [<img alt="GitHub" width="26px" src="https://raw.githubusercontent.com/github/explore/78df643247d429f6cc873026c0622819ad797942/topics/github/github.png" />][git1]![ megaelius](https://github.com/megaelius/) - elias.abad@estudiantat.upc.edu
+* Alex Ferrando - [<img alt="GitHub" width="26px" src="https://raw.githubusercontent.com/github/explore/78df643247d429f6cc873026c0622819ad797942/topics/github/github.png" />][git2]![ Naxel100](https://github.com/Naxel100/) - alex.ferrando@estudiantat.upc.edu
+* Carlos Hurtado - [<img alt="GitHub" width="26px" src="https://raw.githubusercontent.com/github/explore/78df643247d429f6cc873026c0622819ad797942/topics/github/github.png" />][git3]![ CarlOwOs](https://github.com/CarlOwOs/) - carlos.hurtado.comin@estudiantat.upc.edu
+* Víctor Novelle - [<img alt="GitHub" width="26px" src="https://raw.githubusercontent.com/github/explore/78df643247d429f6cc873026c0622819ad797942/topics/github/github.png" />][git4]![ Vinomo4](https://github.com/Vinomo4/) - victor.novelle@estudiantat.upc.edu
+
+<br>
+<br>
 
 Project Link: [https://github.com/megaelius/Delfos-datathon-fme](https://github.com/megaelius/Delfos-datathon-fme)
 
@@ -189,9 +182,13 @@ Project Link: [https://github.com/megaelius/Delfos-datathon-fme](https://github.
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* []()
-* []()
-* []()
+* [Facultat de Matemàtiques i Estadística](https://fme.upc.edu/ca)
+* [Universitat Politècnica de Catalunya - BarcelonaTech](https://www.upc.edu/ca)
+* [Associació d'Estudiants de Dades](https://twitter.com/datastudents)
+
+<div align="center">
+    <img src="README_Images/screenshot4.png" alt="SS4">
+  </div>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -199,16 +196,9 @@ Project Link: [https://github.com/megaelius/Delfos-datathon-fme](https://github.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/megaelius/Delfos-datathon-fme.svg?style=for-the-badge
-[contributors-url]: https://github.com/megaelius/Delfos-datathon-fme/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/megaelius/Delfos-datathon-fme.svg?style=for-the-badge
-[forks-url]: https://github.com/megaelius/Delfos-datathon-fme/network/members
-[stars-shield]: https://img.shields.io/github/stars/megaelius/Delfos-datathon-fme.svg?style=for-the-badge
-[stars-url]: https://github.com/megaelius/Delfos-datathon-fme/stargazers
-[issues-shield]: https://img.shields.io/github/issues/megaelius/Delfos-datathon-fme.svg?style=for-the-badge
-[issues-url]: https://github.com/megaelius/Delfos-datathon-fme/issues
-[license-shield]: https://img.shields.io/github/license/megaelius/Delfos-datathon-fme.svg?style=for-the-badge
-[license-url]: https://github.com/megaelius/Delfos-datathon-fme/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/linkedin_username
-[product-screenshot]: images/screenshot.png
+[git1]: https://github.com/megaelius/
+[git2]: https://github.com/Naxel100
+[git3]: https://github.com/CarlOwOs
+[git4]: https://github.com/Vinomo4
+
+
