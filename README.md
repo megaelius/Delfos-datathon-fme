@@ -54,7 +54,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Finding restaurants that one may like it's nowadays an easy task thanks to all the software tools we currently have. However such task becomes more difficult when instead of going by ourselves, we go to have dinner in a group. Everyone has different tastes, preferences, and budgets. Thus, it is not trivial how to combine them to select a restaurant that everybody will love.
+Finding restaurants that one may like is nowadays an easy task thanks to all the software tools we currently have. However such task becomes more difficult when instead of going by ourselves, we go to have dinner in a group. Everyone has different tastes, preferences, and budgets. Thus, it is not trivial how to combine them to select a restaurant that everybody will love.
 
 To ease this task, we have developed a Restaurant Recommendation System that uses the restaurant prices, location, ratings, and reviews from both users and restaurants to find the perfect match for you and your companions.
 
